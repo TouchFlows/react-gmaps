@@ -13,6 +13,8 @@ const Gmaps = createReactClass({
 
   map: null,
 
+  trafficLayer: null,
+
   getInitialState() {
     return {
       isMapCreated: false
@@ -54,6 +56,8 @@ const Gmaps = createReactClass({
       ...this.props,
       center: new google.maps.LatLng(this.props.lat, this.props.lng)
     });
+    this.trafficLayer = new google.maps.TrafficLayer();
+    this.trafficLayer.setMap(this.map);    
     this.setState({
       isMapCreated: true
     });
@@ -69,7 +73,8 @@ const Gmaps = createReactClass({
       }
       return React.cloneElement(child, {
         ref: child.ref,
-        map: this.map
+        map: this.map,
+        trafficLayer: this.trafficLayer
       });
     });
   },

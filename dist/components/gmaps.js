@@ -46,6 +46,8 @@ var Gmaps = (0, _createReactClass2['default'])({
 
   map: null,
 
+  trafficLayer: null,
+
   getInitialState: function getInitialState() {
     return {
       isMapCreated: false
@@ -85,6 +87,8 @@ var Gmaps = (0, _createReactClass2['default'])({
     this.map = new google.maps.Map(node, _extends({}, this.props, {
       center: new google.maps.LatLng(this.props.lat, this.props.lng)
     }));
+    this.trafficLayer = new google.maps.TrafficLayer();
+    this.trafficLayer.setMap(this.map);
     this.setState({
       isMapCreated: true
     });
@@ -102,7 +106,8 @@ var Gmaps = (0, _createReactClass2['default'])({
       }
       return _react2['default'].cloneElement(child, {
         ref: child.ref,
-        map: _this.map
+        map: _this.map,
+        trafficLayer: _this.trafficLayer
       });
     });
   },
