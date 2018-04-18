@@ -56,8 +56,10 @@ const Gmaps = createReactClass({
       ...this.props,
       center: new google.maps.LatLng(this.props.lat, this.props.lng)
     });
-    this.trafficLayer = new google.maps.TrafficLayer();
-    this.trafficLayer.setMap(this.map);    
+    if(this.props.traffic){
+      this.trafficLayer = new google.maps.TrafficLayer();
+      this.trafficLayer.setMap(this.map);
+    }
     this.setState({
       isMapCreated: true
     });
