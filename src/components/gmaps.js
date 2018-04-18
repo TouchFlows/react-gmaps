@@ -15,6 +15,10 @@ const Gmaps = createReactClass({
 
   trafficLayer: null,
 
+  transitLayer: null,
+
+  bicycleLayer: null,
+
   getInitialState() {
     return {
       isMapCreated: false
@@ -59,6 +63,14 @@ const Gmaps = createReactClass({
     if(this.props.traffic){
       this.trafficLayer = new google.maps.TrafficLayer();
       this.trafficLayer.setMap(this.map);
+    }
+    if(this.props.transit){
+      this.transitLayer = new google.maps.TransitLayer();
+      this.transitLayer.setMap(map);
+    }
+    if(this.propos.bicycle){
+      this.bicycleLayerLayer = new google.maps.BicyclingLayer();
+      this.bicycleLayerLayer.setMap(map);
     }
     this.setState({
       isMapCreated: true

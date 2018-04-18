@@ -67,6 +67,8 @@ class App extends React.Component {
         lng={coords.lng}
         zoom={12}
         traffic={true}
+        transit={false}
+        bicycle={false}
         loadingMessage={'Be happy'}
         params={params}
         onMapCreated={this.onMapCreated}>

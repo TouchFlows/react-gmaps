@@ -53,6 +53,8 @@ const App = createReactClass({
           lng={-0.08040660000006028}
           zoom={12}
           traffic={true}
+          transit={false}
+          bicycle={false}
           {...handlers} />
         <ul style={styles.cols}>
           {events}
