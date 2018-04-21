@@ -103,9 +103,9 @@ var Gmaps = (0, _createReactClass2['default'])({
     //google.maps.event.trigger(map, 'resize');
     //map.fitBounds();
 
-    google.maps.event.trigger(map, 'resize'); // Can't remember if really helps
-    map.setZoom(map.getZoom() - 1);
-    map.setZoom(map.getZoom() + 1); // It won't flicker or make the transition between zoom levels. GMap just ignore the zoom change but redraw the tiles :/
+    google.maps.event.trigger(this.map, 'resize'); // Can't remember if really helps
+    this.map.setZoom(map.getZoom() - 1);
+    this.map.setZoom(map.getZoom() + 1); // It won't flicker or make the transition between zoom levels. GMap just ignore the zoom change but redraw the tiles :/
   },
 
   getChildren: function getChildren() {
