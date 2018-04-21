@@ -66,9 +66,7 @@ class App extends React.Component {
         lat={coords.lat}
         lng={coords.lng}
         zoom={12}
-        traffic={true}
-        transit={false}
-        bicycle={false}
+        interval={60000}
         loadingMessage={'Be happy'}
         params={params}
         onMapCreated={this.onMapCreated}>
@@ -87,6 +85,9 @@ class App extends React.Component {
           lng={coords.lng}
           radius={500}
           onClick={this.onClick} />
+        <TrafficLayer />
+        <TransitLayer />
+        <BicyclingLayer />
       </Gmaps>
     );
   }

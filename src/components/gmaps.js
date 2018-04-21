@@ -13,11 +13,7 @@ const Gmaps = createReactClass({
 
   map: null,
 
-  trafficLayer: null,
-
-  transitLayer: null,
-
-  bicycleLayer: null,
+  refreshTimer: null,
 
   getInitialState() {
     return {
@@ -29,10 +25,14 @@ const Gmaps = createReactClass({
     this.setState({
       callbackIndex: GoogleMaps.load(this.props.params, this.mapsCallback)
     });
+    if(this.props.interval){
+      this.refreshTimer = setInterval(this.refreshMap, this.props.interval); // runs every minute
+    }
   },
 
   componentWillUnmount() {
     GoogleMaps.removeCallback(this.state.callbackIndex);
+    this.refreshTimer = null;
     this.removeListeners();
   },
 
@@ -60,18 +60,6 @@ const Gmaps = createReactClass({
       ...this.props,
       center: new google.maps.LatLng(this.props.lat, this.props.lng)
     });
-    if(this.props.traffic){
-      this.trafficLayer = new google.maps.TrafficLayer();
-      this.trafficLayer.setMap(this.map);
-    }
-    if(this.props.transit){
-      this.transitLayer = new google.maps.TransitLayer();
-      this.transitLayer.setMap(map);
-    }
-    if(this.propos.bicycle){
-      this.bicycleLayerLayer = new google.maps.BicyclingLayer();
-      this.bicycleLayerLayer.setMap(map);
-    }
     this.setState({
       isMapCreated: true
     });
@@ -80,6 +68,15 @@ const Gmaps = createReactClass({
     }
   },
 
+  function refreshMap() {
+    //google.maps.event.trigger(map, 'resize');
+    //map.fitBounds();
+
+    google.maps.event.trigger(map, 'resize'); // Can't remember if really helps
+    map.setZoom( map.getZoom() -1 );
+    map.setZoom( map.getZoom() +1 ); // It won't flicker or make the transition between zoom levels. GMap just ignore the zoom change but redraw the tiles :/
+  }
+
   getChildren() {
     return React.Children.map(this.props.children, (child) => {
       if (!React.isValidElement(child)) {
@@ -87,8 +84,7 @@ const Gmaps = createReactClass({
       }
       return React.cloneElement(child, {
         ref: child.ref,
-        map: this.map,
-        trafficLayer: this.trafficLayer
+        map: this.map
       });
     });
   },
