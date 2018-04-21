@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createReactClass from 'create-react-class';
-import {Gmaps} from '../dist';
+import {Gmaps, TrafficLayer} from '../dist';
 import MapEvents from '../dist/events/map';
 
 const styles = {
@@ -53,7 +53,9 @@ const App = createReactClass({
           lng={-0.08040660000006028}
           zoom={12}
           interval={60000}
-          {...handlers} />
+          {...handlers}>
+          <TrafficLayer/>
+          </Gmaps>
         <ul style={styles.cols}>
           {events}
         </ul>
