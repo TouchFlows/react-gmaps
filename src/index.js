@@ -8,4 +8,4 @@ import TransitLayer from './components/transit-layer';
 import TrafficLayer from './components/traffic-layer';
 import BicyclingLayer from './components/bicycling-layer';
 
-export {Gmaps, Marker, InfoWindow, Circle, Polyline, Polygon, TransitLayer; TrafficLayer, BicyclingLayer};
+export {Gmaps, Marker, InfoWindow, Circle, Polyline, Polygon, TransitLayer, TrafficLayer, BicyclingLayer};

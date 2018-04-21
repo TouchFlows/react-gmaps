@@ -30,9 +30,24 @@ var _componentsPolygon = require('./components/polygon');
 
 var _componentsPolygon2 = _interopRequireDefault(_componentsPolygon);
 
+var _componentsTransitLayer = require('./components/transit-layer');
+
+var _componentsTransitLayer2 = _interopRequireDefault(_componentsTransitLayer);
+
+var _componentsTrafficLayer = require('./components/traffic-layer');
+
+var _componentsTrafficLayer2 = _interopRequireDefault(_componentsTrafficLayer);
+
+var _componentsBicyclingLayer = require('./components/bicycling-layer');
+
+var _componentsBicyclingLayer2 = _interopRequireDefault(_componentsBicyclingLayer);
+
 exports.Gmaps = _componentsGmaps2['default'];
 exports.Marker = _componentsMarker2['default'];
 exports.InfoWindow = _componentsInfoWindow2['default'];
 exports.Circle = _componentsCircle2['default'];
 exports.Polyline = _componentsPolyline2['default'];
 exports.Polygon = _componentsPolygon2['default'];
+exports.TransitLayer = _componentsTransitLayer2['default'];
+exports.TrafficLayer = _componentsTrafficLayer2['default'];
+exports.BicyclingLayer = _componentsBicyclingLayer2['default'];

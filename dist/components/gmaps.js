@@ -46,7 +46,7 @@ var Gmaps = (0, _createReactClass2['default'])({
 
   map: null,
 
-  trafficLayer: null,
+  refreshTimer: null,
 
   getInitialState: function getInitialState() {
     return {
@@ -58,10 +58,14 @@ var Gmaps = (0, _createReactClass2['default'])({
     this.setState({
       callbackIndex: _utilsGoogleMaps2['default'].load(this.props.params, this.mapsCallback)
     });
+    if (this.props.interval) {
+      this.refreshTimer = setInterval(this.refreshMap, this.props.interval); // runs every minute
+    }
   },
 
   componentWillUnmount: function componentWillUnmount() {
     _utilsGoogleMaps2['default'].removeCallback(this.state.callbackIndex);
+    this.refreshTimer = null;
     this.removeListeners();
   },
 
@@ -87,14 +91,21 @@ var Gmaps = (0, _createReactClass2['default'])({
     this.map = new google.maps.Map(node, _extends({}, this.props, {
       center: new google.maps.LatLng(this.props.lat, this.props.lng)
     }));
-    this.trafficLayer = new google.maps.TrafficLayer();
-    this.trafficLayer.setMap(this.map);
     this.setState({
       isMapCreated: true
     });
     if (this.props.onMapCreated) {
       this.props.onMapCreated(this.map);
     }
+  },
+
+  refreshMap: function refreshMap() {
+    //google.maps.event.trigger(map, 'resize');
+    //map.fitBounds();
+
+    google.maps.event.trigger(map, 'resize'); // Can't remember if really helps
+    map.setZoom(map.getZoom() - 1);
+    map.setZoom(map.getZoom() + 1); // It won't flicker or make the transition between zoom levels. GMap just ignore the zoom change but redraw the tiles :/
   },
 
   getChildren: function getChildren() {
@@ -106,8 +117,7 @@ var Gmaps = (0, _createReactClass2['default'])({
       }
       return _react2['default'].cloneElement(child, {
         ref: child.ref,
-        map: _this.map,
-        trafficLayer: _this.trafficLayer
+        map: _this.map
       });
     });
   },
