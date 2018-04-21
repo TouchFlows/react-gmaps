@@ -52,9 +52,7 @@ const App = createReactClass({
           lat={51.5258541}
           lng={-0.08040660000006028}
           zoom={12}
-          traffic={true}
-          transit={false}
-          bicycle={false}
+          interval={60000}
           {...handlers} />
         <ul style={styles.cols}>
           {events}
